@@ -13,7 +13,7 @@ export default function Cube({mousePosition}){
     return(
         <mesh ref={CubRef}>
             <boxGeometry args={[2,2,2]} />
-            <meshStandardMaterial color="skyblue" />
+            <meshStandardMaterial color="orange" />
         </mesh>
     )
 }
