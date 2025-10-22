@@ -3,39 +3,40 @@ import { Environment, OrbitControls } from '@react-three/drei'
 import './App.css'
 import { Canvas } from '@react-three/fiber'
 import Cube from './components/Cube'
+import { ThreeBackground } from './components/ThreeBackground'
 
 function App() {
-  const [mousePosition, setMousePosition] = useState({x:0, y:0})
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
-  useEffect(()=>{
-    const handleMouseMove=(event)=>{
+  useEffect(() => {
+    const handleMouseMove = (event) => {
       setMousePosition({
-        x: (event.clientX/window.innerWidth) *2-1,
-        y: -(event.clientY/window.innerHeight) *2+1
+        x: (event.clientX / window.innerWidth) * 2 - 1,
+        y: -(event.clientY / window.innerHeight) * 2 + 1
       })
     }
 
     window.addEventListener('mousemove', handleMouseMove)
-    return()=>{
+    return () => {
       window.removeEventListener('mousemove', handleMouseMove)
     }
-  },[])
+  }, [])
 
   return (
-    <div className='bg-blue-100'>
-      <Canvas camera={{position:[3,3,3]}}>
+    <div className="min-h-screen relative overflow-hidden">
+      <ThreeBackground />
+      <Canvas camera={{ position: [3, 3, 3] }}>
         <ambientLight intensity={0.2} />
-        <directionalLight position={[5,5,5]} intensity={1}/>
+        <directionalLight position={[5, 5, 5]} intensity={1} />
+        {/* <Cube mousePosition={mousePosition} /> */}
 
-        <Cube mousePosition={mousePosition}/>
-
-        <OrbitControls 
+        <OrbitControls
           enableZoom={false}
           enablePan={false}
           enableRotate={false}
         />
 
-        <Environment preset='sunset'/>
+        <Environment preset='sunset' />
 
       </Canvas>
     </div>
